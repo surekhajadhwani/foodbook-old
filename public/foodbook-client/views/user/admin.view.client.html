@@ -1,0 +1,53 @@
+<section id="intro" class="section-intro">
+    <div class="overlay">
+        <div class="container">
+            <div class="main-text">
+                <div class="input-group">
+                    <input type="text" ng-model="model.searchUser" ng-change="model.searchByUsernameKey(model.searchUser)" class="form-control" id="user" placeholder="Find User: Alice">
+                    <span class="input-group-btn">
+                        <a ng-click="model.searchByUsernameKey(model.searchUser)" class="btn btn-default search-button-community" type="button">
+                            <span class="glyphicon glyphicon-search search-button-community"></span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+<section ng-if="(model.searchUser)" id="search-result">
+    <div ng-if="model.users.length == 0">
+        <h2 class="text-center">No results yet. Please refine your search query.</h2>
+    </div>
+    <div class="container">
+        <div class="panel-group">
+            <div ng-repeat="user in model.users" class="panel panel-info">
+                <a ng-if = "(model.searchUser)" href="#/user/profile/{{user._id}}">
+                    <div class="panel-heading"><h3>{{user.username}}</h3></div>
+                    <ul class="list-group panel-body">
+                        <div class="row container text-center">
+                            <div class="col-sm-3">
+                                <img class="img-responsive center-block favorite-img" src="{{user.profile_pic_url}}">
+                            </div>
+                            <div class="col-sm-3">
+                                <h4>First Name:</h4>
+                                <h5>{{user.firstName}}</h5>
+                            </div>
+                            <div class="col-sm-3">
+                                <h4>Last Name:</h4>
+                                <h5>{{user.lastName}}</h5>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="pal">
+                                    <a ng-click="model.deleteUserByUsername(user)" class="btn btn-danger">
+                                        Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
